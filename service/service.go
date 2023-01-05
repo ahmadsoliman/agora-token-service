@@ -11,6 +11,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
+	"github.com/gin-contrib/cors"
 )
 
 // Service is Ravelin backend service
@@ -78,6 +79,9 @@ func NewService() *Service {
 	}
 
 	api := gin.Default()
+	
+	// allows all origins
+  api.Use(cors.Default())
 
 	api.GET("rtc/:channelName/:role/:tokenType/:rtcuid/", s.getRtcToken)
 	api.GET("rtm/:rtmuid/", s.getRtmToken)
